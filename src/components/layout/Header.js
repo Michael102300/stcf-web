@@ -11,7 +11,9 @@ const Header = () => {
 
   return (
     <header className="app-header">
-      <p className="nombre-usuario">Bienvenida a STFC</p>
+      <p className="nombre-usuario">
+        Bienvenido {user ? user.name : null} ! a STFC
+      </p>
       <nav className="nav-principal">
         <button className="btn btn-blank btn-primario" onClick={() => logout()}>
           LogOut

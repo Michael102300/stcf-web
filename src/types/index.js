@@ -6,10 +6,12 @@ export const CURRENT_PROBLEM = "CURRENT_PROBLEM";
 export const DELETE_PROBLEM = "DELETE_PROBLEM";
 export const ERROR_PROBLEM = "ERROR_PROBLEM";
 
+export const PROBLEM_TECH = "PROBLEM_TECH";
+export const PROBLEM_VALIDATE_TECH = "PROBLEM_VALIDATE_TECH";
+
 export const TASKS_PROJECT = "TASKS_PROJECT";
 export const ADD_TASK = "ADD_TASK";
 export const TASK_VALIDATE = "TASK_VALIDATE";
-export const DELETE_TASK = "DELETE_TASK";
 export const CURRENT_TASK = "CURRENT_TASK";
 export const EDIT_TASK = "EDIT_TASK";
 export const CLEAN_TASK = "CLEAN_TASK";
