@@ -5,7 +5,7 @@ import AuthState from "./context/auth/authState";
 import AlertState from "./context/alerts/alertState";
 import tokenAuth from "./config/tokenAuth";
 import Problems from "./components/problems/Problems";
-
+import PrivateRoute from "./components/routes/PrivateRoutes";
 const token = localStorage.getItem("token");
 if (token) {
   tokenAuth(token);
@@ -19,7 +19,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Login} />
             <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/problems" component={Problems} />
+            <PrivateRoute exact path="/problems" component={Problems} />
           </Switch>
         </Router>
       </AuthState>

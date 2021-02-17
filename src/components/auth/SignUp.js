@@ -13,7 +13,7 @@ const SignUp = (props) => {
   //en caso de que el usuario se hubiese autenticado
   useEffect(() => {
     if (authenticate) {
-      props.history.push("/projects");
+      props.history.push("/problems");
     }
     if (msg) {
       showAlert(msg.msg, msg.category);
@@ -80,15 +80,15 @@ const SignUp = (props) => {
       showAlert("Password no son iguales", "alerta-error");
       return;
     }
-    /* signupUser({
+    signupUser({
       name,
       email,
       password,
-      nit,
+      NIT: nit,
       address,
       mobile,
-      phone
-    }); */
+      phone,
+    });
   };
   return (
     <div className="form-usuario">

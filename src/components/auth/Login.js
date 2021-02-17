@@ -12,7 +12,7 @@ const Login = (props) => {
 
   useEffect(() => {
     if (authenticate) {
-      props.history.push("/projects");
+      props.history.push("/problems");
     }
     if (msg) {
       showAlert(msg.msg, msg.category);
