@@ -282,12 +282,7 @@ aside {
 }
 
 .form-usuario {
-  background: rgb(227, 227, 236);
-  background: radial-gradient(
-    circle,
-    rgba(227, 227, 236, 1) 0%,
-    rgba(175, 187, 52, 1) 100%
-  );
+  background-image: url("./assets/img/fondo.jpg");
   height: 100vh;
   min-height: 600px;
   display: flex;
@@ -296,10 +291,10 @@ aside {
 }
 
 .contenedor-form {
-  padding: 5rem 3rem;
+  padding: 1.2rem 3rem 3rem 3rem;
   max-width: 500px;
   width: 95%;
-  background-color: var(--blanco);
+  background-color: #ffffffe6;
   border-radius: 1rem;
 }
 
@@ -358,4 +353,25 @@ aside {
 .alerta-error {
   background-color: rgb(230, 78, 78);
   color: var(--blanco);
+}
+
+.user-zone {
+  padding: 20px;
+}
+.user-zone .zone {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 80vh;
+}
+.user {
+  display: flex;
+}
+.user h1 {
+  margin: auto;
+}
+.userIcon {
+  width: 200px !important;
+  height: 200px !important;
+  margin: 20px 20px;
 }

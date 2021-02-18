@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { TextField } from "@material-ui/core";
 import AlertContext from "../../context/alerts/alertContext";
 import AuthContext from "../../context/auth/authContext";
+import Tech from "../../assets/img/welcome.png";
 
 const Login = (props) => {
   const alertContext = useContext(AlertContext);
@@ -47,6 +48,7 @@ const Login = (props) => {
         <div className={`alerta ${alert.category}`}> {alert.msg} </div>
       ) : null}
       <div className="contenedor-form sombra-dark">
+        <img src={Tech} width={250} style={{ marginLeft: "20%" }} />
         <h1>Sign In</h1>
         <form onSubmit={onSubmit}>
           <div className="campo-form">

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import AuthContext from "../../context/auth/authContext";
+import { ExitToApp } from "@material-ui/icons";
 const Header = () => {
   const authContext = useContext(AuthContext);
   const { user, authUser, logout } = authContext;
@@ -11,12 +12,12 @@ const Header = () => {
 
   return (
     <header className="app-header">
-      <p className="nombre-usuario">
-        Bienvenido {user ? user.name : null} ! a STFC
+      <p className="nombre-usuario" style={{ marginTop: 10, fontSize: 30 }}>
+        Bienvenido {user ? user.name : null} !
       </p>
       <nav className="nav-principal">
         <button className="btn btn-blank btn-primario" onClick={() => logout()}>
-          LogOut
+          <ExitToApp style={{ fontSize: 60 }} />
         </button>
       </nav>
     </header>

@@ -5,6 +5,7 @@ const SideBar = () => {
   const authContext = useContext(AuthContext);
   const { user } = authContext;
   const handleChange = () => {};
+  console.log(user);
   return (
     <aside>
       {user ? (
@@ -12,9 +13,9 @@ const SideBar = () => {
           <SideBarUser />
         ) : user.role === "tecnico" ? (
           <SideBarTech />
-        ) : (
-          user.role === "admin" || user.role === "analista"(<SideBarAdmin />)
-        )
+        ) : user.role === "admin" || user.role === "analista" ? (
+          <SideBarAdmin />
+        ) : null
       ) : null}
     </aside>
   );
@@ -107,6 +108,21 @@ const SideBarAdmin = () => {
           <li>
             <button type="button" className="btn btn-blank">
               Proceso
+            </button>
+          </li>
+          <li>
+            <button type="button" className="btn btn-blank">
+              Cancelados
+            </button>
+          </li>
+          <li>
+            <button type="button" className="btn btn-blank">
+              Promedio
+            </button>
+          </li>
+          <li>
+            <button type="button" className="btn btn-blank">
+              Historial
             </button>
           </li>
         </ul>

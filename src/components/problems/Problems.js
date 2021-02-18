@@ -6,6 +6,7 @@ import Header from "../layout/Header";
 import ListTasks from "../tasks/ListTasks"; */
 import AuthContext from "../../context/auth/authContext";
 import UserZone from "../ZoneViews/UserZone";
+import Welcome from "../ZoneViews/Inicio";
 
 const Problems = () => {
   const authContext = useContext(AuthContext);
@@ -22,7 +23,7 @@ const Problems = () => {
       <div className="seccion-principal">
         <Header />
         <main>
-          <UserZone />
+          <Welcome />
           {/* <FormTask />
           <div className="contenedor-tareas">
             <ListTasks />
