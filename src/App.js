@@ -14,17 +14,19 @@ if (token) {
 
 function App() {
   return (
-    <AlertState>
-      <AuthState>
-        <Router>
-          <Switch>
-            <Route exact path="/" component={Login} />
-            <Route exact path="/signup" component={SignUp} />
-            <PrivateRoute exact path="/problems" component={Problems} />
-          </Switch>
-        </Router>
-      </AuthState>
-    </AlertState>
+    <ProblemState>
+      <AlertState>
+        <AuthState>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Login} />
+              <Route exact path="/signup" component={SignUp} />
+              <PrivateRoute exact path="/problems" component={Problems} />
+            </Switch>
+          </Router>
+        </AuthState>
+      </AlertState>
+    </ProblemState>
   );
 }
 

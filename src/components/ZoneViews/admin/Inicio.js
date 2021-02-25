@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import {
   Card,
@@ -7,11 +7,12 @@ import {
   Typography,
   CardMedia,
 } from "@material-ui/core";
-import Register from "../../assets/icon/register.svg";
-import Progress from "../../assets/icon/statistics.svg";
-import Cancel from "../../assets/icon/delete.svg";
-import Result from "../../assets/icon/results.svg";
+import Register from "../../../assets/icon/register.svg";
+import Progress from "../../../assets/icon/statistics.svg";
+import Cancel from "../../../assets/icon/delete.svg";
+import Result from "../../../assets/icon/results.svg";
 import { Line } from "@reactchartjs/react-chart.js";
+import ProblemContext from "../../../context/problems/problemsContext";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "10%",
     marginTop: "2%",
     justifyContent: "space-between",
+    cursor: "pointer",
   },
   container: {
     display: "flex",
@@ -37,9 +39,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Inicio = () => {
+const Inicio = ({ setView }) => {
   const classes = useStyles();
   const theme = useTheme();
+  const problemContext = useContext(ProblemContext);
+  const { problems } = problemContext;
+  let register = problems.filter((pro) => pro.stateProcces === "registrado");
+  let proceso = problems.filter((pro) => pro.stateProcces === "proceso");
+  let cancelado = problems.filter((pro) => pro.stateProcces === "cancelado");
+  let resuelto = problems.filter((pro) => pro.stateProcces === "resuelto");
   const data = {
     labels: ["1", "2", "3", "4", "5", "6"],
     datasets: [
@@ -86,14 +94,14 @@ const Inicio = () => {
   return (
     <div>
       <div className={classes.container}>
-        <Card className={classes.root}>
+        <Card className={classes.root} onClick={() => setView(1)}>
           <div className={classes.details}>
             <CardContent className={classes.content}>
               <Typography component="h3" variant="h3">
                 Registros
               </Typography>
               <Typography vcomponent="h4" variant="h4" color="textSecondary">
-                12
+                {register.length}
               </Typography>
             </CardContent>
           </div>
@@ -103,14 +111,14 @@ const Inicio = () => {
             title="Live from space album cover"
           />
         </Card>
-        <Card className={classes.root}>
+        <Card className={classes.root} onClick={() => setView(3)}>
           <div className={classes.details}>
             <CardContent className={classes.content}>
               <Typography component="h3" variant="h3">
                 Proceso
               </Typography>
               <Typography vcomponent="h4" variant="h4" color="textSecondary">
-                12
+                {proceso.length}
               </Typography>
             </CardContent>
           </div>
@@ -122,14 +130,14 @@ const Inicio = () => {
         </Card>
       </div>
       <div className={classes.container}>
-        <Card className={classes.root}>
+        <Card className={classes.root} onClick={() => setView(4)}>
           <div className={classes.details}>
             <CardContent className={classes.content}>
               <Typography component="h3" variant="h3">
                 Cancelados
               </Typography>
               <Typography vcomponent="h4" variant="h4" color="textSecondary">
-                12
+                {cancelado.length}
               </Typography>
             </CardContent>
           </div>
@@ -139,14 +147,14 @@ const Inicio = () => {
             title="Live from space album cover"
           />
         </Card>
-        <Card className={classes.root}>
+        <Card className={classes.root} onClick={() => setView(2)}>
           <div className={classes.details}>
             <CardContent className={classes.content}>
               <Typography component="h3" variant="h3">
                 Resueltos
               </Typography>
               <Typography vcomponent="h4" variant="h4" color="textSecondary">
-                12
+                {resuelto.length}
               </Typography>
             </CardContent>
           </div>

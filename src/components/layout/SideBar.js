@@ -1,44 +1,54 @@
 import React, { useContext, useEffect } from "react";
 import AuthContext from "../../context/auth/authContext";
 
-const SideBar = () => {
+const SideBar = ({ setView }) => {
   const authContext = useContext(AuthContext);
   const { user } = authContext;
-  const handleChange = () => {};
-  console.log(user);
   return (
     <aside>
       {user ? (
         user.role === "cliente" ? (
-          <SideBarUser />
+          <SideBarUser setView={setView} />
         ) : user.role === "tecnico" ? (
-          <SideBarTech />
+          <SideBarTech setView={setView} />
         ) : user.role === "admin" || user.role === "analista" ? (
-          <SideBarAdmin />
+          <SideBarAdmin setView={setView} />
         ) : null
       ) : null}
     </aside>
   );
 };
 
-const SideBarUser = () => {
+const SideBarUser = ({ setView }) => {
   return (
     <>
       <h1>STFC</h1>
       <div className="proyectos">
         <ul className="listado-proyectos">
           <li>
-            <button type="button" className="btn btn-blank">
+            <button
+              type="button"
+              className="btn btn-blank"
+              onClick={() => setView(0)}
+            >
               Mi informacion
             </button>
           </li>
           <li>
-            <button type="button" className="btn btn-blank">
+            <button
+              type="button"
+              className="btn btn-blank"
+              onClick={() => setView(1)}
+            >
               Crear problema
             </button>
           </li>
           <li>
-            <button type="button" className="btn btn-blank">
+            <button
+              type="button"
+              className="btn btn-blank"
+              onClick={() => setView(2)}
+            >
               Mis problemas
             </button>
           </li>
@@ -48,7 +58,7 @@ const SideBarUser = () => {
   );
 };
 
-const SideBarTech = () => {
+const SideBarTech = ({ setView }) => {
   return (
     <>
       <h1>
@@ -57,22 +67,38 @@ const SideBarTech = () => {
       <div className="proyectos">
         <ul className="listado-proyectos">
           <li>
-            <button type="button" className="btn btn-blank">
+            <button
+              type="button"
+              className="btn btn-blank"
+              onClick={() => setView(0)}
+            >
               Mi informacion
             </button>
           </li>
           <li>
-            <button type="button" className="btn btn-blank">
+            <button
+              type="button"
+              className="btn btn-blank"
+              onClick={() => setView(1)}
+            >
               En proceso
             </button>
           </li>
           <li>
-            <button type="button" className="btn btn-blank">
+            <button
+              type="button"
+              className="btn btn-blank"
+              onClick={() => setView(2)}
+            >
               Nuevos problemas
             </button>
           </li>
           <li>
-            <button type="button" className="btn btn-blank">
+            <button
+              type="button"
+              className="btn btn-blank"
+              onClick={() => setView(3)}
+            >
               Problemas cerrados
             </button>
           </li>
@@ -82,7 +108,7 @@ const SideBarTech = () => {
   );
 };
 
-const SideBarAdmin = () => {
+const SideBarAdmin = ({ setView }) => {
   return (
     <>
       <h1>
@@ -91,37 +117,65 @@ const SideBarAdmin = () => {
       <div className="proyectos">
         <ul className="listado-proyectos">
           <li>
-            <button type="button" className="btn btn-blank">
+            <button
+              type="button"
+              className="btn btn-blank"
+              onClick={() => setView(0)}
+            >
               Inicio
             </button>
           </li>
           <li>
-            <button type="button" className="btn btn-blank">
+            <button
+              type="button"
+              className="btn btn-blank"
+              onClick={() => setView(1)}
+            >
               Registros
             </button>
           </li>
           <li>
-            <button type="button" className="btn btn-blank">
+            <button
+              type="button"
+              className="btn btn-blank"
+              onClick={() => setView(2)}
+            >
               Resueltos
             </button>
           </li>
           <li>
-            <button type="button" className="btn btn-blank">
+            <button
+              type="button"
+              className="btn btn-blank"
+              onClick={() => setView(3)}
+            >
               Proceso
             </button>
           </li>
           <li>
-            <button type="button" className="btn btn-blank">
+            <button
+              type="button"
+              className="btn btn-blank"
+              onClick={() => setView(4)}
+            >
               Cancelados
             </button>
           </li>
           <li>
-            <button type="button" className="btn btn-blank">
+            <button
+              type="button"
+              className="btn btn-blank"
+              onClick={() => setView(5)}
+            >
               Promedio
             </button>
           </li>
           <li>
-            <button type="button" className="btn btn-blank">
+            <button
+              type="button"
+              className="btn btn-blank"
+              onClick={() => setView(6)}
+            >
               Historial
             </button>
           </li>

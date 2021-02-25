@@ -1,16 +1,17 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import SideBar from "../layout/SideBar";
 import Header from "../layout/Header";
 /* import FormTask from "../tasks/FormTask";
 import ListTasks from "../tasks/ListTasks"; */
 import AuthContext from "../../context/auth/authContext";
-import UserZone from "../ZoneViews/UserZone";
-import Welcome from "../ZoneViews/Inicio";
+import ZoneViews from "../ZoneViews/ZoneViews";
+import Welcome from "../ZoneViews/admin/Inicio";
 
 const Problems = () => {
   const authContext = useContext(AuthContext);
   const { authUser } = authContext;
+  const [view, setView] = useState(0);
 
   useEffect(() => {
     authUser();
@@ -19,15 +20,11 @@ const Problems = () => {
 
   return (
     <div className="contenedor-app">
-      <SideBar />
+      <SideBar setView={setView} />
       <div className="seccion-principal">
         <Header />
         <main>
-          <Welcome />
-          {/* <FormTask />
-          <div className="contenedor-tareas">
-            <ListTasks />
-          </div> */}
+          <ZoneViews view={view} setView={setView} />
         </main>
       </div>
     </div>

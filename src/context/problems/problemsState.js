@@ -28,7 +28,29 @@ const ProblemState = (props) => {
   const getAllProblems = async () => {
     try {
       const res = await clientAxios.get("/api/problems");
-      console.log(res);
+      dispatch({
+        type: GET_PROBLEM,
+        payload: res.data,
+      });
+    } catch (error) {
+      const alert = {
+        msg: "Hubo un error",
+        category: "alerta-error",
+      };
+      dispatch({
+        type: ERROR_PROBLEM,
+        payload: alert,
+      });
+    }
+  };
+
+  const createProblem = async (data) => {
+    try {
+      const res = await clientAxios.post("/api/problems", data);
+      dispatch({
+        type: ADD_PROBLEM,
+        payload: res.data,
+      });
     } catch (error) {
       const alert = {
         msg: "Hubo un error",
@@ -49,6 +71,8 @@ const ProblemState = (props) => {
         msg: state.mgs,
         errorForm: state.errorForm,
         currentProblem: state.currentProblem,
+        createProblem,
+        getAllProblems,
       }}
     >
       {props.children}
