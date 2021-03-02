@@ -5,9 +5,10 @@ export const FORM_VALIDATE = "FORM_VALIDATE";
 export const CURRENT_PROBLEM = "CURRENT_PROBLEM";
 export const DELETE_PROBLEM = "DELETE_PROBLEM";
 export const ERROR_PROBLEM = "ERROR_PROBLEM";
-
+export const EDIT_PROBLEM = "EDIT_PROBLEM";
 export const PROBLEM_TECH = "PROBLEM_TECH";
 export const PROBLEM_VALIDATE_TECH = "PROBLEM_VALIDATE_TECH";
+export const GET_TECHS = "GET_TECHS";
 
 export const TASKS_PROJECT = "TASKS_PROJECT";
 export const ADD_TASK = "ADD_TASK";

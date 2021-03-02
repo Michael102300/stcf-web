@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
+import ModalForm from "../../layout/ModalForm";
 
 import ProblemContext from "../../../context/problems/problemsContext";
 
@@ -18,23 +19,16 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
 const Registrados = () => {
   const classes = useStyles();
   const problemContext = useContext(ProblemContext);
-  const { problems } = problemContext;
+  const { problems, saveCurrentProblem, currentProblem } = problemContext;
+  const [formModal, setFormModal] = useState(false);
   let register = problems.filter((pro) => pro.stateProcces === "registrado");
+  const currentProblemLocal = (id) => {
+    saveCurrentProblem(id);
+    setFormModal(true);
+  };
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -62,8 +56,12 @@ const Registrados = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {register
-            ? register.map((row) => (
+          {currentProblem && formModal ? (
+            <ModalForm formModal={formModal} setFormModal={setFormModal} />
+          ) : null}
+          {register ? (
+            register.length > 0 ? (
+              register.map((row) => (
                 <TableRow key={row._id}>
                   <TableCell style={{ fontSize: 15 }}>{row.name}</TableCell>
                   <TableCell style={{ fontSize: 15 }} align="center">
@@ -85,13 +83,24 @@ const Registrados = () => {
                     <IconButton
                       color="primary"
                       aria-label="add to shopping cart"
+                      onClick={() => currentProblemLocal(row._id)}
                     >
                       <EditIcon fontSize="large" />
                     </IconButton>
                   </TableCell>
                 </TableRow>
               ))
-            : null}
+            ) : (
+              <TableRow>
+                <TableCell
+                  style={{ fontSize: 20, textAlign: "center" }}
+                  colSpan="7"
+                >
+                  No tienes problemas registrados
+                </TableCell>
+              </TableRow>
+            )
+          ) : null}
         </TableBody>
       </Table>
     </TableContainer>

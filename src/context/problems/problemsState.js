@@ -4,14 +4,13 @@ import problemReducer from "./problmesReducer";
 import clientAxios from "../../config/axios";
 
 import {
-  PROBLEM_TECH,
   ADD_PROBLEM,
   GET_PROBLEM,
-  DELETE_PROBLEM,
-  FORM_VALIDATE,
   CURRENT_PROBLEM,
   ERROR_PROBLEM,
-  PROBLEM_VALIDATE_TECH,
+  CLEAN_TASK,
+  EDIT_PROBLEM,
+  GET_TECHS,
 } from "../../types";
 
 const ProblemState = (props) => {
@@ -21,6 +20,7 @@ const ProblemState = (props) => {
     msg: null,
     errorForm: false,
     currentProblem: null,
+    techs: [],
   };
 
   const [state, dispatch] = useReducer(problemReducer, initialState);
@@ -44,6 +44,18 @@ const ProblemState = (props) => {
     }
   };
 
+  const getTechs = async () => {
+    try {
+      const res = await clientAxios.get("/api/techs");
+      dispatch({
+        type: GET_TECHS,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const createProblem = async (data) => {
     try {
       const res = await clientAxios.post("/api/problems", data);
@@ -63,6 +75,32 @@ const ProblemState = (props) => {
     }
   };
 
+  const editProblem = async (data) => {
+    try {
+      const res = await clientAxios.put(`/api/problems/${data._id}`, data);
+      console.log(res);
+      dispatch({
+        type: EDIT_PROBLEM,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const saveCurrentProblem = (problem) => {
+    dispatch({
+      type: CURRENT_PROBLEM,
+      payload: problem,
+    });
+  };
+
+  const cleanProblem = () => {
+    dispatch({
+      type: CLEAN_TASK,
+    });
+  };
+
   return (
     <ProblemsContext.Provider
       value={{
@@ -71,8 +109,13 @@ const ProblemState = (props) => {
         msg: state.mgs,
         errorForm: state.errorForm,
         currentProblem: state.currentProblem,
+        techs: state.techs,
+        editProblem,
         createProblem,
         getAllProblems,
+        saveCurrentProblem,
+        cleanProblem,
+        getTechs,
       }}
     >
       {props.children}

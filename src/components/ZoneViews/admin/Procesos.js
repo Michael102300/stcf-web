@@ -36,6 +36,7 @@ const Procesos = () => {
   const { problems } = problemContext;
 
   let proceso = problems.filter((pro) => pro.stateProcces === "proceso");
+  console.log(proceso);
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -58,13 +59,14 @@ const Procesos = () => {
               Fecha de creacion
             </TableCell>
             <TableCell style={{ fontSize: 20 }} align="center">
-              Accion
+              Fecha del ultimos cambios
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {proceso
-            ? proceso.map((row) => (
+          {proceso ? (
+            proceso.length > 0 ? (
+              proceso.map((row) => (
                 <TableRow key={row.name}>
                   <TableCell style={{ fontSize: 15 }}>{row.name}</TableCell>
                   <TableCell style={{ fontSize: 15 }} align="center">
@@ -83,16 +85,23 @@ const Procesos = () => {
                     {row.createdAt.substring(0, 10)}
                   </TableCell>
                   <TableCell style={{ fontSize: 15 }} align="center">
-                    <IconButton
-                      color="primary"
-                      aria-label="add to shopping cart"
-                    >
-                      <EditIcon fontSize="large" />
-                    </IconButton>
+                    {row.editedAt
+                      ? row.editedAt.substring(0, 10)
+                      : "no tiene fecha de modificacion"}
                   </TableCell>
                 </TableRow>
               ))
-            : null}
+            ) : (
+              <TableRow>
+                <TableCell
+                  style={{ fontSize: 20, textAlign: "center" }}
+                  colSpan="7"
+                >
+                  No tienes problemas en proceso
+                </TableCell>
+              </TableRow>
+            )
+          ) : null}
         </TableBody>
       </Table>
     </TableContainer>

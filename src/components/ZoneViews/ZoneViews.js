@@ -2,8 +2,16 @@ import React, { useContext } from "react";
 import { Avatar } from "@material-ui/core";
 import AuthContext from "../../context/auth/authContext";
 import UserIcon from "../../assets/img/user.png";
-import { Inicio, Registrados, Resueltos, Procesos, Cancelados } from "./admin";
+import {
+  Inicio,
+  Registrados,
+  Resueltos,
+  Procesos,
+  Cancelados,
+  UserAdd,
+} from "./admin";
 import { Problems, Profile, NewProblem } from "./user";
+import FormProblem from "../problems/ProblemForm";
 
 const UserZone = ({ view, setView }) => {
   const authContext = useContext(AuthContext);
@@ -49,6 +57,8 @@ const Admin = ({ view, setView }) => {
         <Procesos />
       ) : view === 4 ? (
         <Cancelados />
+      ) : view === 7 ? (
+        <UserAdd />
       ) : null}
     </>
   );

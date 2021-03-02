@@ -1,4 +1,11 @@
-import { ADD_PROBLEM, ERROR_PROBLEM, GET_PROBLEM } from "../../types";
+import {
+  ADD_PROBLEM,
+  ERROR_PROBLEM,
+  EDIT_PROBLEM,
+  GET_PROBLEM,
+  CURRENT_PROBLEM,
+  GET_TECHS,
+} from "../../types";
 //eslint-disable-next-line
 export default (state, action) => {
   switch (action.type) {
@@ -11,6 +18,23 @@ export default (state, action) => {
       return {
         ...state,
         problems: [...state.problems, action.payload],
+      };
+    case GET_TECHS:
+      return {
+        ...state,
+        techs: action.payload,
+      };
+    case EDIT_PROBLEM:
+      return {
+        ...state,
+        problems: state.problems.map((problem) =>
+          problem._id === action.payload._id ? action.payload : problem
+        ),
+      };
+    case CURRENT_PROBLEM:
+      return {
+        ...state,
+        currentProblem: action.payload,
       };
     case ERROR_PROBLEM:
       return {
