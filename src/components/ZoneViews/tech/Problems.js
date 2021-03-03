@@ -37,6 +37,9 @@ const Problems = () => {
               Nombre
             </TableCell>
             <TableCell style={{ fontSize: 20 }} align="center">
+              Dificultad
+            </TableCell>
+            <TableCell style={{ fontSize: 20 }} align="center">
               Estado
             </TableCell>
             <TableCell style={{ fontSize: 20 }} align="center">
