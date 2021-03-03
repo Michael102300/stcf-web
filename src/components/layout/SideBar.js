@@ -115,46 +115,57 @@ const SideBarTech = ({ setView }) => {
       <h1>
         Tickets <span>STFC</span>
       </h1>
-      <div className="proyectos">
-        <ul className="listado-proyectos">
-          <li>
-            <button
-              type="button"
-              className="btn btn-blank"
-              onClick={() => setView(0)}
-            >
-              Mi informacion
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className="btn btn-blank"
-              onClick={() => setView(1)}
-            >
-              En proceso
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className="btn btn-blank"
-              onClick={() => setView(2)}
-            >
-              Nuevos problemas
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className="btn btn-blank"
-              onClick={() => setView(3)}
-            >
-              Problemas cerrados
-            </button>
-          </li>
-        </ul>
-      </div>
+      <List>
+        <ListItem>
+          <ListItemIcon>
+            <AccountCircle style={{ fontSize: 25 }} />
+          </ListItemIcon>
+          <ListItemText
+            primary="Mi perfil"
+            disableTypography={true}
+            onClick={() => setView(0)}
+          />
+        </ListItem>
+      </List>
+      <List
+        component="nav"
+        subheader={
+          <ListSubheader component="div" style={{ fontSize: 16 }}>
+            Problema
+          </ListSubheader>
+        }
+      >
+        <ListItem>
+          <ListItemIcon>
+            <VideoLibrary style={{ fontSize: 25 }} />
+          </ListItemIcon>
+          <ListItemText
+            disableTypography={true}
+            primary="En proceso"
+            onClick={() => setView(1)}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <LibraryAdd style={{ fontSize: 25 }} />
+          </ListItemIcon>
+          <ListItemText
+            primary="Nuevos problemas"
+            disableTypography={true}
+            onClick={() => setView(2)}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <LibraryBooks style={{ fontSize: 25 }} />
+          </ListItemIcon>
+          <ListItemText
+            primary="Mis problemas"
+            disableTypography={true}
+            onClick={() => setView(3)}
+          />
+        </ListItem>
+      </List>
     </>
   );
 };

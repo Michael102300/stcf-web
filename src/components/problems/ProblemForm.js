@@ -59,7 +59,6 @@ const ProblemForm = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(problem);
     createProblem(problem);
     setProblem({
       name: "",
@@ -72,7 +71,6 @@ const ProblemForm = () => {
       user: "",
     });
   };
-  console.log(techs);
   return (
     <div style={{ padding: 20 }}>
       <div

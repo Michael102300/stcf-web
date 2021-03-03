@@ -11,6 +11,12 @@ import {
   UserAdd,
 } from "./admin";
 import { Problems, Profile, NewProblem } from "./user";
+import {
+  Problems as ProblemTechs,
+  Profile as ProfileTech,
+  Cancelados as CancelTech,
+  Proceso,
+} from "./tech";
 import FormProblem from "../problems/ProblemForm";
 
 const UserZone = ({ view, setView }) => {
@@ -65,11 +71,19 @@ const Admin = ({ view, setView }) => {
     </>
   );
 };
-const Tech = () => {
+const Tech = ({ view }) => {
   return (
-    <div>
-      <h1>Tech</h1>
-    </div>
+    <>
+      {view === 0 ? (
+        <ProfileTech />
+      ) : view === 2 ? (
+        <ProblemTechs />
+      ) : view === 3 ? (
+        <CancelTech />
+      ) : view === 1 ? (
+        <Proceso />
+      ) : null}
+    </>
   );
 };
 

@@ -8,6 +8,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import ProblemContext from "../../context/problems/problemsContext";
+import AuthContext from "../../context/auth/authContext";
 
 export default function FormDialog({ setFormModal, formModal }) {
   const problemContext = useContext(ProblemContext);
@@ -18,6 +19,8 @@ export default function FormDialog({ setFormModal, formModal }) {
     getTechs,
     editProblem,
   } = problemContext;
+  const authContext = useContext(AuthContext);
+  const UserCurrent = authContext.user;
   const problem = problems.find((pro) => pro._id === currentProblem);
   useEffect(() => getTechs(), []);
   const {
@@ -41,7 +44,8 @@ export default function FormDialog({ setFormModal, formModal }) {
     stateProcces,
     dificulty,
     createdAt,
-    editAt: new Date().toISOString(),
+    solution: "",
+    editedAt: new Date().toISOString(),
   });
   const states = [
     { id: 1, name: "registrado" },
@@ -118,16 +122,19 @@ export default function FormDialog({ setFormModal, formModal }) {
               justifyContent: "space-between",
             }}
           >
-            <div style={{ width: "30%" }}>
+            <div
+              style={{ width: UserCurrent.role !== "tecnico" ? "30%" : "49%" }}
+            >
               <DialogContentText style={{ margin: 0, fontSize: 20 }}>
                 Estado :{" "}
               </DialogContentText>
               <Select
                 fullWidth
-                style={{ fontSize: 20 }}
+                style={{ fontSize: 20, color: "black" }}
                 defaultValue={stateProcces || ""}
                 onChange={(e) => handleChange(e)}
                 name="stateProcces"
+                disabled={UserCurrent.role === "tecnico" ? false : true}
               >
                 {states.map((st) => (
                   <MenuItem style={{ fontSize: 20 }} value={st.name}>
@@ -136,16 +143,19 @@ export default function FormDialog({ setFormModal, formModal }) {
                 ))}
               </Select>
             </div>
-            <div style={{ width: "30%" }}>
+            <div
+              style={{ width: UserCurrent.role !== "tecnico" ? "30%" : "49%" }}
+            >
               <DialogContentText style={{ margin: 0, fontSize: 20 }}>
                 Dificultad :{" "}
               </DialogContentText>
               <Select
                 fullWidth
-                style={{ fontSize: 20 }}
+                style={{ fontSize: 20, color: "black" }}
                 defaultValue={dificulty || ""}
                 name="dificulty"
                 onChange={(e) => handleChange(e)}
+                disabled={UserCurrent.role === "tecnico" ? true : false}
               >
                 {dificults.map((st) => (
                   <MenuItem style={{ fontSize: 20 }} value={st.name}>
@@ -154,25 +164,45 @@ export default function FormDialog({ setFormModal, formModal }) {
                 ))}
               </Select>
             </div>
-            <div style={{ width: "30%" }}>
-              <DialogContentText style={{ margin: 0, fontSize: 20 }}>
-                Tecnico :{" "}
-              </DialogContentText>
-              <Select
-                fullWidth
-                style={{ fontSize: 20 }}
-                name="tecnico"
-                onChange={(e) => handleChange(e)}
-              >
-                {techs &&
-                  techs.map((st) => (
-                    <MenuItem style={{ fontSize: 20 }} value={st._id}>
-                      {st.name}
-                    </MenuItem>
-                  ))}
-              </Select>
-            </div>
+            {console.log("state", stateProcces)}
+            {UserCurrent.role !== "tecnico" ? (
+              <div style={{ width: "30%" }}>
+                <DialogContentText style={{ margin: 0, fontSize: 20 }}>
+                  Tecnico :{" "}
+                </DialogContentText>
+                <Select
+                  fullWidth
+                  style={{ fontSize: 20 }}
+                  name="tecnico"
+                  onChange={(e) => handleChange(e)}
+                >
+                  {techs &&
+                    techs.map((st) => (
+                      <MenuItem style={{ fontSize: 20 }} value={st._id}>
+                        {st.name}
+                      </MenuItem>
+                    ))}
+                </Select>
+              </div>
+            ) : null}
           </div>
+          {UserCurrent ? (
+            UserCurrent.role === "tecnico" && stateProcces !== "registrado" ? (
+              <>
+                <DialogContentText style={{ margin: 0, fontSize: 20 }}>
+                  Solucion:
+                </DialogContentText>
+                <Input
+                  name="solution"
+                  id="solution"
+                  fullWidth
+                  style={{ fontSize: 20, color: "black" }}
+                  onChange={(e) => handleChange(e)}
+                />
+              </>
+            ) : null
+          ) : null}
+
           <DialogContentText style={{ margin: 0, fontSize: 20 }}>
             Fecha de creacion:{" "}
           </DialogContentText>
