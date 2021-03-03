@@ -59,6 +59,8 @@ const Admin = ({ view, setView }) => {
         <Cancelados />
       ) : view === 7 ? (
         <UserAdd />
+      ) : view === 8 ? (
+        <FormProblem />
       ) : null}
     </>
   );

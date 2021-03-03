@@ -11,6 +11,7 @@ import {
   CLEAN_TASK,
   EDIT_PROBLEM,
   GET_TECHS,
+  GET_ALL_USER,
 } from "../../types";
 
 const ProblemState = (props) => {
@@ -21,6 +22,7 @@ const ProblemState = (props) => {
     errorForm: false,
     currentProblem: null,
     techs: [],
+    users: [],
   };
 
   const [state, dispatch] = useReducer(problemReducer, initialState);
@@ -49,6 +51,18 @@ const ProblemState = (props) => {
       const res = await clientAxios.get("/api/techs");
       dispatch({
         type: GET_TECHS,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAllUsers = async () => {
+    try {
+      const res = await clientAxios.get("/api/users");
+      dispatch({
+        type: GET_ALL_USER,
         payload: res.data,
       });
     } catch (error) {
@@ -110,12 +124,14 @@ const ProblemState = (props) => {
         errorForm: state.errorForm,
         currentProblem: state.currentProblem,
         techs: state.techs,
+        users: state.users,
         editProblem,
         createProblem,
         getAllProblems,
         saveCurrentProblem,
         cleanProblem,
         getTechs,
+        getAllUsers,
       }}
     >
       {props.children}

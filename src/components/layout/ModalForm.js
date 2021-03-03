@@ -29,7 +29,9 @@ export default function FormDialog({ setFormModal, formModal }) {
     dificulty,
     tecnico,
     user,
+    tecnicoName,
   } = problem;
+  console.log("rpoblem", problem);
   const [form, setForm] = useState({
     _id,
     user,
@@ -165,7 +167,7 @@ export default function FormDialog({ setFormModal, formModal }) {
                 {techs &&
                   techs.map((st) => (
                     <MenuItem style={{ fontSize: 20 }} value={st._id}>
-                      {st.Name}
+                      {st.name}
                     </MenuItem>
                   ))}
               </Select>

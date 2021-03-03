@@ -160,7 +160,7 @@ const SideBarAdmin = ({ setView }) => {
             <Home style={{ fontSize: 25 }} />
           </ListItemIcon>
           <ListItemText
-            primary="Incio"
+            primary="Inicio"
             disableTypography={true}
             onClick={() => setView(0)}
           />
@@ -170,11 +170,11 @@ const SideBarAdmin = ({ setView }) => {
         component="nav"
         subheader={
           <ListSubheader component="div" style={{ fontSize: 16 }}>
-            Creacion usuario o problema
+            Creacion problema
           </ListSubheader>
         }
       >
-        <ListItem>
+        {/* <ListItem>
           <ListItemIcon>
             <PersonAdd style={{ fontSize: 25 }} />
           </ListItemIcon>
@@ -183,7 +183,7 @@ const SideBarAdmin = ({ setView }) => {
             disableTypography={true}
             onClick={() => setView(7)}
           />
-        </ListItem>
+        </ListItem> */}
         <ListItem>
           <ListItemIcon>
             <LibraryAdd style={{ fontSize: 25 }} />
@@ -243,7 +243,7 @@ const SideBarAdmin = ({ setView }) => {
             onClick={() => setView(4)}
           />
         </ListItem>
-        <ListItem>
+        {/* <ListItem>
           <ListItemIcon>
             <AllInbox style={{ fontSize: 25 }} />
           </ListItemIcon>
@@ -262,7 +262,7 @@ const SideBarAdmin = ({ setView }) => {
             disableTypography={true}
             onClick={() => setView(6)}
           />
-        </ListItem>
+        </ListItem> */}
       </List>
     </>
   );

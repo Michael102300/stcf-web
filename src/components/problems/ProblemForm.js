@@ -1,176 +1,199 @@
-import React, { useContext, useState } from "react";
-import { TextField } from "@material-ui/core";
+import React, { useContext, useState, useEffect } from "react";
+import { TextField, Select, MenuItem, InputLabel } from "@material-ui/core";
 import AlertContext from "../../context/alerts/alertContext";
 import AuthContext from "../../context/auth/authContext";
+import ProblemContext from "../../context/problems/problemsContext";
 
 const ProblemForm = () => {
   const alertContext = useContext(AlertContext);
   const { alert, showAlert } = alertContext;
   const authContext = useContext(AuthContext);
   const { msg, authenticate, signupUser } = authContext;
-  const [user, setUser] = useState({
+  const problemContext = useContext(ProblemContext);
+  const { techs, users, getAllUsers, getTechs, createProblem } = problemContext;
+  const [problem, setProblem] = useState({
     name: "",
-    email: "",
-    password: "",
-    confirmpassword: "",
-    nit: "",
-    address: "",
-    phone: "",
-    mobile: "",
+    stateProcces: "",
+    tecnico: "",
+    dificulty: "",
+    description: "",
+    solution: "",
+    user: "",
   });
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+  useEffect(() => {
+    getTechs();
+  }, []);
 
   const {
     name,
-    email,
-    password,
-    confirmpassword,
-    nit,
-    address,
-    phone,
-    mobile,
-  } = user;
+    stateProcces,
+    tecnico,
+    dificulty,
+    description,
+    solution,
+    user,
+  } = problem;
 
-  const onChange = (e) => {
-    setUser({
-      ...user,
+  const states = [
+    { id: 1, name: "registrado" },
+    { id: 2, name: "proceso" },
+    { id: 3, name: "resuelto" },
+    { id: 4, name: "cancelado" },
+  ];
+  const dificults = [
+    { id: 1, name: "baja" },
+    { id: 2, name: "media" },
+    { id: 3, name: "alta" },
+  ];
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setProblem({
+      ...problem,
       [e.target.name]: e.target.value,
     });
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    if (
-      name.trim() === "" ||
-      email.trim() === "" ||
-      password.trim() === "" ||
-      confirmpassword.trim() === "" ||
-      nit.trim() === "" ||
-      address.trim() === "" ||
-      phone.trim() === "" ||
-      mobile.trim() === ""
-    ) {
-      showAlert("Todos los campos son obligatorios", "alerta-error");
-      return;
-    }
-    if (password.length < 6) {
-      showAlert("Password minimo de 6 caracteres", "alerta-error");
-      return;
-    }
-    if (phone < 8) {
-      showAlert("Ingrese un numero de casa valido");
-      return;
-    }
-    if (mobile < 11) {
-      showAlert("Ingrese un numero de celular valido");
-      return;
-    }
-    if (password !== confirmpassword) {
-      showAlert("Password no son iguales", "alerta-error");
-      return;
-    }
-    signupUser({
-      name,
-      email,
-      password,
-      NIT: nit,
-      address,
-      mobile,
-      phone,
+    console.log(problem);
+    createProblem(problem);
+    setProblem({
+      name: "",
+      stateProcces: "",
+      tecnico: "",
+      tecnicoName: "",
+      dificulty: "",
+      description: "",
+      solution: "",
+      user: "",
     });
   };
+  console.log(techs);
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <div className="campo-form">
-          <TextField
-            id="name"
-            name="name"
-            type="text"
-            placeholder="Nombre"
-            value={name}
-            onChange={onChange}
-          />
-        </div>
-        <div className="campo-form">
-          <TextField
-            id="nit"
-            name="nit"
-            type="text"
-            placeholder="Identificacion"
-            value={nit}
-            onChange={onChange}
-          />
-        </div>
-        <div className="campo-form">
-          <TextField
-            id="phone"
-            name="phone"
-            type="text"
-            placeholder="Numero casa"
-            value={phone}
-            onChange={onChange}
-          />
-        </div>
-        <div className="campo-form">
-          <TextField
-            id="mobile"
-            name="mobile"
-            type="text"
-            placeholder="Numero celular"
-            value={mobile}
-            onChange={onChange}
-          />
-        </div>
-        <div className="campo-form">
-          <TextField
-            id="address"
-            name="address"
-            type="text"
-            placeholder="Direccion"
-            value={address}
-            onChange={onChange}
-          />
-        </div>
-        <div className="campo-form">
-          <TextField
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={onChange}
-          />
-        </div>
-        <div className="campo-form">
-          <TextField
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={onChange}
-          />
-        </div>
-        <div className="campo-form">
-          <TextField
-            id="confirmpassword"
-            name="confirmpassword"
-            type="password"
-            placeholder="Confirm password"
-            value={confirmpassword}
-            onChange={onChange}
-          />
-        </div>
-        <div className="campo-form">
-          <input
-            type="submit"
-            className="btn btn-primario btn-block"
-            value="Sign Up"
-          />
-        </div>
-      </form>
-      {/* <Link to={"/"} className="enlace-cuenta">
-        Sign In
-      </Link> */}
+    <div style={{ padding: 20 }}>
+      <div
+        style={{
+          borderRadius: 10,
+          backgroundColor: "white",
+          padding: 10,
+        }}
+      >
+        <h1 style={{ textAlign: "start", marginLeft: 20, marginTop: 20 }}>
+          Crea un problema
+        </h1>
+        <form onSubmit={onSubmit}>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <div className="campo-form" style={{ width: "45%" }}>
+              <TextField
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Nombre del problema"
+                value={name}
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+            <div className="campo-form" style={{ width: "45%" }}>
+              <Select
+                fullWidth
+                style={{ fontSize: 20 }}
+                defaultValue="Escoge el usuario"
+                onChange={(e) => handleChange(e)}
+                name="user"
+              >
+                {users
+                  ? users.map((us) => (
+                      <MenuItem style={{ fontSize: 20 }} value={us._id}>
+                        {us.name}
+                      </MenuItem>
+                    ))
+                  : null}
+              </Select>
+            </div>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <div className="campo-form" style={{ width: "29%" }}>
+              <Select
+                fullWidth
+                style={{ fontSize: 20 }}
+                defaultValue="Escoge el tecnico"
+                onChange={(e) => handleChange(e)}
+                name="tecnico"
+              >
+                {techs
+                  ? techs.map((us) => (
+                      <MenuItem style={{ fontSize: 20 }} value={us._id}>
+                        {us.name}
+                      </MenuItem>
+                    ))
+                  : null}
+              </Select>
+            </div>
+            <div className="campo-form" style={{ width: "29%" }}>
+              <Select
+                fullWidth
+                style={{ fontSize: 20 }}
+                defaultValue={"estado"}
+                onChange={(e) => handleChange(e)}
+                name="stateProcces"
+              >
+                {states.map((st) => (
+                  <MenuItem style={{ fontSize: 20 }} value={st.name}>
+                    {st.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+            <div className="campo-form" style={{ width: "29%" }}>
+              <Select
+                fullWidth
+                style={{ fontSize: 20 }}
+                defaultValue={dificulty || ""}
+                name="dificulty"
+                onChange={(e) => handleChange(e)}
+              >
+                {dificults.map((st) => (
+                  <MenuItem style={{ fontSize: 20 }} value={st.name}>
+                    {st.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </div>
+          </div>
+          <div
+            className="campo-form"
+            style={{ marginLeft: 20, marginRight: 20 }}
+          >
+            <TextField
+              id="description"
+              name="description"
+              type="text"
+              placeholder="Descripcion del problema"
+              value={description}
+              onChange={(e) => handleChange(e)}
+            />
+          </div>
+          <div
+            className="campo-form"
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginRight: 20,
+            }}
+          >
+            <input
+              type="submit"
+              className="btn btn-primario btn-block"
+              value="Crear"
+              style={{ width: 150 }}
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

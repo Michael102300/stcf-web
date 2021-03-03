@@ -5,6 +5,7 @@ import {
   GET_PROBLEM,
   CURRENT_PROBLEM,
   GET_TECHS,
+  GET_ALL_USER,
 } from "../../types";
 //eslint-disable-next-line
 export default (state, action) => {
@@ -23,6 +24,11 @@ export default (state, action) => {
       return {
         ...state,
         techs: action.payload,
+      };
+    case GET_ALL_USER:
+      return {
+        ...state,
+        users: action.payload,
       };
     case EDIT_PROBLEM:
       return {

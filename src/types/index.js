@@ -9,6 +9,7 @@ export const EDIT_PROBLEM = "EDIT_PROBLEM";
 export const PROBLEM_TECH = "PROBLEM_TECH";
 export const PROBLEM_VALIDATE_TECH = "PROBLEM_VALIDATE_TECH";
 export const GET_TECHS = "GET_TECHS";
+export const GET_ALL_USER = "GET_ALL_USER";
 
 export const TASKS_PROJECT = "TASKS_PROJECT";
 export const ADD_TASK = "ADD_TASK";

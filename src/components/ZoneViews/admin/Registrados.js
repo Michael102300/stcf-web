@@ -29,6 +29,7 @@ const Registrados = () => {
     saveCurrentProblem(id);
     setFormModal(true);
   };
+  console.log(register);
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -71,7 +72,7 @@ const Registrados = () => {
                     {row.stateProcces}
                   </TableCell>
                   <TableCell style={{ fontSize: 15 }} align="center">
-                    {row.tecnico ? row.tecnico : "sin asignar"}
+                    {row.tecnicoName ? row.tecnicoName.name : "sin asignar"}
                   </TableCell>
                   <TableCell style={{ fontSize: 15 }} align="center">
                     {row.description}
