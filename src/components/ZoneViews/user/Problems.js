@@ -46,12 +46,14 @@ const Problems = () => {
           {problems
             ? problems.map((row) => (
                 <TableRow key={row._id}>
-                  <TableCell style={{ fontSize: 15 }}>{row.name}</TableCell>
+                  <TableCell style={{ fontSize: 15 }} align="center">
+                    {row.name}
+                  </TableCell>
                   <TableCell style={{ fontSize: 15 }} align="center">
                     {row.stateProcces}
                   </TableCell>
                   <TableCell style={{ fontSize: 15 }} align="center">
-                    {row.tecnico ? row.tecnico : "sin asignar"}
+                    {row.tecnicoName ? row.tecnicoName.name : "sin asignar"}
                   </TableCell>
                   <TableCell style={{ fontSize: 15 }} align="center">
                     {row.description}

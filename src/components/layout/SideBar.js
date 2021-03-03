@@ -18,6 +18,7 @@ import {
   Cancel,
   AccountTree,
   AllInbox,
+  AccountCircle,
 } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -62,37 +63,47 @@ const SideBarUser = ({ setView }) => {
   return (
     <>
       <h1>STFC</h1>
-      <div className="proyectos">
-        <ul className="listado-proyectos">
-          <li>
-            <button
-              type="button"
-              className="btn btn-blank"
-              onClick={() => setView(0)}
-            >
-              Mi informacion
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className="btn btn-blank"
-              onClick={() => setView(1)}
-            >
-              Crear problema
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className="btn btn-blank"
-              onClick={() => setView(2)}
-            >
-              Mis problemas
-            </button>
-          </li>
-        </ul>
-      </div>
+      <List>
+        <ListItem>
+          <ListItemIcon>
+            <AccountCircle style={{ fontSize: 25 }} />
+          </ListItemIcon>
+          <ListItemText
+            primary="Mi perfil"
+            disableTypography={true}
+            onClick={() => setView(0)}
+          />
+        </ListItem>
+      </List>
+      <List
+        component="nav"
+        subheader={
+          <ListSubheader component="div" style={{ fontSize: 16 }}>
+            Problema
+          </ListSubheader>
+        }
+      >
+        <ListItem>
+          <ListItemIcon>
+            <LibraryAdd style={{ fontSize: 25 }} />
+          </ListItemIcon>
+          <ListItemText
+            disableTypography={true}
+            primary="Crear Problema"
+            onClick={() => setView(1)}
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <LibraryBooks style={{ fontSize: 25 }} />
+          </ListItemIcon>
+          <ListItemText
+            primary="Mis Problemas"
+            disableTypography={true}
+            onClick={() => setView(2)}
+          />
+        </ListItem>
+      </List>
     </>
   );
 };
