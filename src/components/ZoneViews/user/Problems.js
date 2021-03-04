@@ -26,6 +26,9 @@ const Problems = () => {
         <TableHead>
           <TableRow>
             <TableCell style={{ fontSize: 20 }} align="center">
+              Identificador
+            </TableCell>
+            <TableCell style={{ fontSize: 20 }} align="center">
               Nombre
             </TableCell>
             <TableCell style={{ fontSize: 20 }} align="center">
@@ -46,6 +49,9 @@ const Problems = () => {
           {problems
             ? problems.map((row) => (
                 <TableRow key={row._id}>
+                  <TableCell style={{ fontSize: 15 }} align="center">
+                    {row._id}
+                  </TableCell>
                   <TableCell style={{ fontSize: 15 }} align="center">
                     {row.name}
                   </TableCell>

@@ -42,7 +42,12 @@ const Procesos = () => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell style={{ fontSize: 20 }}>Nombre</TableCell>
+            <TableCell style={{ fontSize: 20 }} align="center">
+              Identificador
+            </TableCell>
+            <TableCell style={{ fontSize: 20 }} align="center">
+              Nombre
+            </TableCell>
             <TableCell style={{ fontSize: 20 }} align="center">
               Dificultad
             </TableCell>
@@ -67,8 +72,13 @@ const Procesos = () => {
           {proceso ? (
             proceso.length > 0 ? (
               proceso.map((row) => (
-                <TableRow key={row.name}>
-                  <TableCell style={{ fontSize: 15 }}>{row.name}</TableCell>
+                <TableRow key={row._id}>
+                  <TableCell style={{ fontSize: 15 }} align="center">
+                    {row._id}
+                  </TableCell>
+                  <TableCell style={{ fontSize: 15 }} align="center">
+                    {row.name}
+                  </TableCell>
                   <TableCell style={{ fontSize: 15 }} align="center">
                     {row.dificulty}
                   </TableCell>

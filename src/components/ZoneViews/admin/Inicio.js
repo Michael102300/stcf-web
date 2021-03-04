@@ -52,7 +52,7 @@ const Inicio = ({ setView }) => {
     labels: ["1", "2", "3", "4", "5", "6"],
     datasets: [
       {
-        label: "# of Votes",
+        label: "# de registrados",
         data: [12, 19, 3, 5, 2, 3],
         fill: false,
         backgroundColor: "rgb(255, 99, 132)",
@@ -60,7 +60,7 @@ const Inicio = ({ setView }) => {
         yAxisID: "y-axis-1",
       },
       {
-        label: "# of No Votes",
+        label: "# de resueltos",
         data: [1, 2, 1, 1, 2, 2],
         fill: false,
         backgroundColor: "rgb(54, 162, 235)",
@@ -165,7 +165,7 @@ const Inicio = ({ setView }) => {
           />
         </Card>
       </div>
-      <Line data={data} options={options} />
+      {/* <Line data={data} options={options} /> */}
     </div>
   );
 };

@@ -34,6 +34,9 @@ const Problems = () => {
         <TableHead>
           <TableRow>
             <TableCell style={{ fontSize: 20 }} align="center">
+              Identificador
+            </TableCell>
+            <TableCell style={{ fontSize: 20 }} align="center">
               Nombre
             </TableCell>
             <TableCell style={{ fontSize: 20 }} align="center">
@@ -64,7 +67,12 @@ const Problems = () => {
             register.length > 0 ? (
               register.map((row) => (
                 <TableRow key={row._id}>
-                  <TableCell style={{ fontSize: 15 }}>{row.name}</TableCell>
+                  <TableCell style={{ fontSize: 15 }} align="center">
+                    {row._id}
+                  </TableCell>
+                  <TableCell style={{ fontSize: 15 }} align="center">
+                    {row.name}
+                  </TableCell>
                   <TableCell style={{ fontSize: 15 }} align="center">
                     {row.dificulty}
                   </TableCell>

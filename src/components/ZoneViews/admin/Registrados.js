@@ -35,7 +35,12 @@ const Registrados = () => {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell style={{ fontSize: 20 }}>Nombre</TableCell>
+            <TableCell style={{ fontSize: 20 }} align="center">
+              Identificador
+            </TableCell>
+            <TableCell style={{ fontSize: 20 }} align="center">
+              Nombre
+            </TableCell>
             <TableCell style={{ fontSize: 20 }} align="center">
               Dificultad
             </TableCell>
@@ -64,7 +69,12 @@ const Registrados = () => {
             register.length > 0 ? (
               register.map((row) => (
                 <TableRow key={row._id}>
-                  <TableCell style={{ fontSize: 15 }}>{row.name}</TableCell>
+                  <TableCell style={{ fontSize: 15 }} align="center">
+                    {row._id}
+                  </TableCell>
+                  <TableCell style={{ fontSize: 15 }} align="center">
+                    {row.name}
+                  </TableCell>
                   <TableCell style={{ fontSize: 15 }} align="center">
                     {row.dificulty}
                   </TableCell>
